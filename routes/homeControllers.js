@@ -121,3 +121,13 @@ exports.deleteProduct = (req, res)=>{
         res.redirect("/home");
     });
 };
+
+// Login page
+exports.getLogin = (req, res) => {
+    res.render("login");
+}
+
+// signUp page
+exports.getSignUp = (req, res) => {
+    res.render("signUp");
+}

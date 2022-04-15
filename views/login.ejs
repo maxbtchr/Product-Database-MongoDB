@@ -1,0 +1,17 @@
+<%- include('./partials/header'); %>
+<main class="notBootstrap">
+    <div class="contain">
+        <h1>Login</h1>
+        <%- include('./partials/messages') -%> 
+        <form action="">
+            <input type="text" placeholder="Email Address">
+            <input type="text" placeholder="Password">
+            <button type="submit">Login</button>
+            <p>OR</p>
+        </form>
+        <form action="/signUp" method="get">
+            <button>Sign Up</button>
+        </form>
+    </div>
+</main>
+<%- include('./partials/footer'); %>
