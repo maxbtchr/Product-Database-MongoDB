@@ -1,0 +1,38 @@
+<%- include('./partials/header') -%>
+<main>
+    <div class="container mt-5">
+        <%- include('./partials/messages') -%> 
+        <table class="table  table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Operation</th>
+            </thead>
+            <tbody>
+                <% products.forEach((product)=> { %>
+                <tr>
+                    <td><%= product.code %></td>
+                    <td><%= product.description %></td>
+                    <td><%= product.price %></td>
+                    <td>
+                    <form style="display: inline;" action="/edit/<%= product.id %>?_method=put" method="get">
+                            <button style="cursor: pointer;" type="submit" class="formButton">Edit</button>
+                    </form>
+                    <form style="display: inline;" action="/delete/<%= product.id %>?_method=DELETE" method="post">
+                            <button style="cursor: pointer;" type="submit" class="formButton">Delete</button>
+                    </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Operation</th>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<%- include('./partials/footer') -%>

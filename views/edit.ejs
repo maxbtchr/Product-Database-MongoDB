@@ -1,0 +1,13 @@
+<%- include('./partials/header'); %>
+<main class="notBootstrap">
+    <div class="contain">
+        <h2>Update Product Data</h2>
+        <form action="/edit/<%= product.id %>?_method=put" method="post">
+            <input type="text" class="input" name="code" value="<%= product.code %>" placeholder="Product Code">
+            <input type="text" class="input" name="description" value="<%= product.description %>" placeholder="Product Description">
+            <input type="text" class="input" name="price" value="<%= product.price %>" placeholder="Product Price">
+            <button class="formButton" type="submit">Update Product</button>
+        </form>
+    </div>
+</main>
+<%- include('./partials/footer'); %>

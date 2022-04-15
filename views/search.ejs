@@ -1,0 +1,30 @@
+<%- include('./partials/header') -%>
+<main class="notBootstrap">
+    <div class="contain">
+        <%- include('./partials/messages') -%>
+        <h2>Search Product</h2>
+        <form action="/searchProduct" method="get">
+            <input type="text" class="input" name="findCode" placeholder="Product Code">
+            <button class="formButton" type="submit">Search in Database</button>
+        </form>
+    </div>
+    <% if(products){ %> 
+    <div class="container mt-5">
+        <table class="table  table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Price</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= products.code %> </td>
+                    <td><%= products.description %> </td>
+                    <td><%= products.price %> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <% } %> 
+</main>
+<%- include('./partials/footer') -%>

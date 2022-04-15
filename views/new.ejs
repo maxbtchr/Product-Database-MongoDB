@@ -1,0 +1,14 @@
+<%- include('./partials/header'); %>
+<main class="notBootstrap">
+    <div class="contain">
+        <%- include('./partials/messages') -%> 
+        <h2>Add New Product</h2>
+        <form action="/new" method="post">
+            <input type="text" class="input" name="code" placeholder="Product Code" required>
+            <input type="text" class="input" name="description" placeholder="Product Description" required>
+            <input type="text" class="input" name="price" placeholder="Product Price" required>
+            <button class="formButton" type="submit">Add to Database</button>
+        </form>
+    </div>
+</main>
+<%- include('./partials/footer'); %>
