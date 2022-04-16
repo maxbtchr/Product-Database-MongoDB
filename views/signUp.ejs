@@ -1,15 +1,15 @@
 <%- include('./partials/header'); %>
 <main class="notBootstrap">
     <div class="contain">
-        <h1>Register</h1>
+        <h2>Register</h2>
         <%- include('./partials/messages') -%> 
         <form action="">
-            <input type="text" placeholder="Name">
-            <input type="text" placeholder="Email Address">
-            <input type="text" placeholder="Password">
-            <button type="submit">Register</button>
+            <input type="text" class="input" placeholder="Name">
+            <input type="text" class="input" placeholder="Email Address">
+            <input type="text" class="input" placeholder="Password">
+            <button type="submit" class="formButton">Register</button>
         </form>
-        <a href="/login">Back to Login</a>
+        <a href="/login" class="m-2">Back to Login</a>
     </div>
 </main>
 <%- include('./partials/footer'); %>

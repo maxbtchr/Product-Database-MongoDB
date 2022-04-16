@@ -1,16 +1,17 @@
 <%- include('./partials/header'); %>
 <main class="notBootstrap">
     <div class="contain">
-        <h1>Login</h1>
+        <h2>Login</h2>
         <%- include('./partials/messages') -%> 
         <form action="">
-            <input type="text" placeholder="Email Address">
-            <input type="text" placeholder="Password">
-            <button type="submit">Login</button>
-            <p>OR</p>
+            <input type="text" class="input" placeholder="Email Address">
+            <input type="text" class="input" placeholder="Password">
+            <a href="" class="m-2 text-danger">Forgot Password?</a>
+            <button type="submit" class="formButton">Login</button>
+            <p class="m-2 text-center">OR</p>
         </form>
         <form action="/signUp" method="get">
-            <button>Sign Up</button>
+            <button class="formButton">Sign Up</button>
         </form>
     </div>
 </main>
