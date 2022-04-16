@@ -1,4 +1,7 @@
-const Product = require("../model/product")
+const Product = require("../model/product");
+const User = require("../model/user");
+const passport = require("passport");
+const { authenticate } = require("passport");
 
 
 // home page
@@ -131,3 +134,34 @@ exports.getLogin = (req, res) => {
 exports.getSignUp = (req, res) => {
     res.render("signUp");
 }
+
+//signUp function
+exports.signUp = (req, res, next) => {
+    if (req.skip) next();
+    let  userParams = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    };
+
+    let newUser = new User(userParams);
+
+    User.register(newUser, req.body.password, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.locals.redirect("/signUp");
+            next();
+        }
+        else {
+            res.locals.redirect("/login");
+            next();
+        }
+    });
+}
+
+authenticate : passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: "Invalid username or password",
+    successRedirect: "/home",
+    successFlash: "You are now logged in"
+})

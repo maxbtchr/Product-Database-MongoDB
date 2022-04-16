@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const methodOverride = require('method-override');
 const userControllers = require("./routes/users");
+const passport = require("passport");
+const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
 const cookieParser = require("cookie-parser")
 const path = require("path");
@@ -36,6 +38,14 @@ app.use(expressSession({
     resave: false,
     saveUninitialized: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use(connectFlash());
 
 app.use((req, res, next) => {
