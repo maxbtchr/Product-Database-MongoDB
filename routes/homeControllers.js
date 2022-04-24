@@ -1,8 +1,6 @@
 const Product = require("../model/product");
 const User = require("../model/user");
 const passport = require("passport");
-const { authenticate } = require("passport");
-
 
 // home page
 exports.getIndex = (req, res) => {
@@ -164,4 +162,23 @@ authenticate : passport.authenticate("local", {
     failureFlash: "Invalid username or password",
     successRedirect: "/home",
     successFlash: "You are now logged in"
-})
+});
+
+authenticate : (req, res, next)=>{
+    User.findOne({email: req.body.email}).
+    then(user=>{
+
+        if(user.password == req.body.password){
+            res.locals.redirect = `/users/${user._id}`;
+            res.locals.user = user;
+            next();
+        } else {
+            res.locals.redirect = "/user/login";
+            next();
+        }
+
+    })
+    .catch(error=>{
+        next(error);
+    });
+}

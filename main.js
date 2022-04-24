@@ -42,6 +42,7 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+const User = require('./model/user');
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
