@@ -3,10 +3,10 @@
     <div class="contain">
         <h2>Register</h2>
         <%- include('./partials/messages') -%> 
-        <form action="">
-            <input type="text" class="input" placeholder="Name">
-            <input type="text" class="input" placeholder="Email Address">
-            <input type="text" class="input" placeholder="Password">
+        <form action="/signUp/createUser" method="post">
+            <input type="text" class="input" name="name" placeholder="Name">
+            <input type="text" class="input" name="email" placeholder="Email Address">
+            <input type="text" class="input" name="password" placeholder="Password">
             <button type="submit" class="formButton">Register</button>
         </form>
         <a href="/login" class="m-2">Back to Login</a>

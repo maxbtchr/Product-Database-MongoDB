@@ -3,9 +3,9 @@
     <div class="contain">
         <h2>Login</h2>
         <%- include('./partials/messages') -%> 
-        <form action="">
-            <input type="text" class="input" placeholder="Email Address">
-            <input type="text" class="input" placeholder="Password">
+        <form action="/login" method="post">
+            <input type="text" class="input" name="email" placeholder="Email Address">
+            <input type="text" class="input" name="password" placeholder="Password">
             <a href="" class="m-2 text-danger">Forgot Password?</a>
             <button type="submit" class="formButton">Login</button>
             <p class="m-2 text-center">OR</p>

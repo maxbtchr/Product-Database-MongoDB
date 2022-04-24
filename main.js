@@ -4,7 +4,9 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const methodOverride = require('method-override');
-const userControllers = require("./routes/users");
+// const userControllers = require("./routes/users");
+const userController1 = require('./routes/users1');
+
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
@@ -42,6 +44,7 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+const User = require('./model/user');
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -53,7 +56,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(userControllers);
+app.use(userController1);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {console.log(`Le serveur tourne sur http://localhost:${port}.`)});
