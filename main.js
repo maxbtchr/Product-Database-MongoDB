@@ -4,16 +4,11 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const methodOverride = require('method-override');
-// const userControllers = require("./routes/users");
-const userController1 = require('./routes/users1');
-
+const userController = require('./routes/users');
 const passport = require("passport");
-const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
 const cookieParser = require("cookie-parser")
 const path = require("path");
-
-
 
 
 // utiliser process.env. pour aller chercher dans le document config.env 
@@ -56,7 +51,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(userController1);
+app.use(userController);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {console.log(`Le serveur tourne sur http://localhost:${port}.`)});
