@@ -4,16 +4,32 @@ const passport = require("passport");
 
 module.exports = {
 
+    getHeader : (req, res, next) => {
+        if(req.isAuthenticated()){
+            user = req.user;
+            res.locals.user = user;
+            next();
+        } else {
+            res.locals.user = undefined;
+            next();
+        }
+    },
+
     // get Products
     getIndex : (req, res, next) => {
-        Product.find({})
-        .then(products => {
-            res.locals.products = products;
+        if(req.isAuthenticated()){
+            Product.find({})
+            .then(products => {
+                res.locals.products = products;
+                next();
+            })
+            .catch(error => {
+                res.redirect('/');
+            });
+        } else {
+            res.locals.products = undefined;
             next();
-        })
-        .catch(error => {
-            res.redirect('/');
-        });
+        }
     },
 
     // render index
@@ -21,9 +37,9 @@ module.exports = {
         res.render("index");
     },
 
-    indexView : (req, res)=>{
-        res.render("index", {products: undefined});
-    },
+    // indexView : (req, res)=>{
+    //     res.render("index", {products: undefined});
+    // },
 
     // redirect
     redirectView: (req, res)=>{
@@ -33,7 +49,7 @@ module.exports = {
     },
 
     redirect: (req, res) => {
-        res.redirect("/home");
+        res.redirect("/login");
     },
 
 
@@ -182,32 +198,25 @@ module.exports = {
     // authenticate login
     authenticate2 : passport.authenticate("local", {
         failureRedirect: "/login",
-        successRedirect: "/users/home"
+        failureFlash: {type: "error_msg", message: "Your email or password is incorrect"},
+        successRedirect: "/home",
+        successFlash: {type: "success_msg", message: "You are now logged in"}
     }),
-    
-    authenticate : (req, res, next)=>{
-        User.findOne({email: req.body.email}).
-        then(user=>{
-    
-            if(user.password == req.body.password){
-                res.redirect('/home');
-                res.locals.user = user;
-                next();
-            } else {
-                res.redirect('/login');
-                next();
-            }
-    
-        })
-        .catch(error=>{
-            next(error);
-        });
-    },
 
 
     // logout
-    isAuthenticatedUser : (req, res)=> {
-        req.isAuthenticated() ;
-        res.redirect('/login');
+    isAuthenticatedUser : (req, res, next)=> {
+        if(req.isAuthenticated()){
+            next();
+        }
+        res.redirect("/login");
+    },
+
+
+    logout : (req, res) => {
+        req.logout();
+        res.redirect('/');
     }
+
 };
+

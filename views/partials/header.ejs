@@ -16,12 +16,16 @@
 </head>
 <body>
     <header>
-        <h1><a href="/">Product Database System</a></h1>
+        <h1><a href="/home">Product Database System</a></h1>
             <nav>
-                <li>name</li>
-                <li><a href="/">Home</a></li>
+                <% if (locals.user) { %> 
+                <li><%= user.name %></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="/new">Add Product</a></li>
                 <li><a href="/search">Search</a></li>
                 <li><a href="/logout">Logout</a></li>
+                <% } else { %>
+                <li><a href="/login">Login</a></li>
+                <% } %> 
             </nav>
     </header>
